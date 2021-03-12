@@ -11,7 +11,6 @@ This is an application for
 ## Technologies used
 * Ruby
 * Sinatra
-* Heroku
 * Rspec
 * Capybara
 * SQL
