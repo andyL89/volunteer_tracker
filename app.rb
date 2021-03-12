@@ -25,8 +25,8 @@ get('/projects/new') do
 end
 
 post('/projects') do
-  name = params[:project_name]
-  project = Project.new({:name => name, :id => nil})
+  name = params[:project_title]
+  project = Project.new({:title => title, :id => nil})
   project.save()
   @projects = Project.sort()
   erb(:projects)
@@ -44,7 +44,7 @@ end
 
 patch('/projects/:id') do
   @project = Project.find(params[:id].to_i())
-  updates = params[:name]
+  updates = params[:title]
   @project.update(updates)
   @projects = Project.all
   erb(:projects)
@@ -57,34 +57,34 @@ delete('/projects/:id') do
   erb(:projects)
 end
 
-# Songs------------------------------------->
+# Volunteerss----------------------------------title
 
-# Get the detail for a specific song such as lyrics and songwriters.
-get('/albums/:id/songs/:song_id') do
-  @song = Song.find(params[:song_id].to_i())
-  erb(:song)
+# Get the detail for a specific volunteer.
+get('/projects/:id/volunteers/:volunteer_id') do
+  @volunteer = Volunteer.find(params[:volunteer_id].to_i())
+  erb(:volunteer)
 end
 
-# Post a new song. After the song is added, Sinatra will route to the view for the album the song belongs to.
-post('/albums/:id/songs') do
-  @album = Album.find(params[:id].to_i())
-  song = Song.new({:name => params[:song_name], :album_id => @album.id, :id => nil})
-  song.save()
-  erb(:album)
+# Post a new volunteer. After the volunteer is added, Sinatra will route to the view for the project the volunteer belongs to.
+post('/projects/:id/volunteers') do
+  @project = Project.find(params[:id].to_i())
+  volunteer = Volunteer.new({:name => params[:volunteer_name], :project_id => @project.id, :id => nil})
+  volunteer.save()
+  erb(:project)
 end
 
-# Edit a song and then route back to the album view.
-patch('/albums/:id/songs/:song_id') do
-  @album = Album.find(params[:id].to_i())
-  song = Song.find(params[:song_id].to_i())
-  song.update(params[:name], @album.id)
-  erb(:album)
+# Edit a volunteer and then route back to the project view.
+patch('/albums/:id/volunteers/:volunteer_id') do
+  @project = Project.find(params[:id].to_i())
+  volunteer = Volunteer.find(params[:volunteer_id].to_i())
+  volunteer.update(params[:name], @project.id)
+  erb(:project)
 end
 
-# Delete a song and then route back to the album view.
-delete('/albums/:id/songs/:song_id') do
-  song = Song.find(params[:song_id].to_i())
-  song.delete
-  @album = Album.find(params[:id].to_i())
-  erb(:album)
+# Delete a volunteer and then route back to the project view.
+delete('/projects/:id/volunteers/:volunteer_id') do
+  volunteer = Volunteer.find(params[:volunteer_id].to_i())
+  volunteer.delete
+  @project = Project.find(params[:id].to_i())
+  erb(:project)
 end
