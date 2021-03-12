@@ -1,16 +1,16 @@
 class Project
   attr_reader :id, :title
 
-  def initialize(attrs)
-    @title = attrs.fetch(:title)
-    @id = attrs.fetch(:id)
+  def initialize(attributes)
+    @title = attributes.fetch(:title)
+    @id = attributes.fetch(:id)
   end
 
   def self.all
     returned_projects = DB.exec('SELECT * FROM projects')
     projects = []
-    returned_projects.each() do project|
-      name = project.fetch('title')
+    returned_projects.each() do |project|
+      title = project.fetch('title')
       id = project.fetch('id').to_i
       projects.push(Project.new({:title => title, :id => id}))
     end
@@ -23,7 +23,7 @@ class Project
   end
 
   def == (project_to_compare)
-    self.name() == project_to_compare.name()
+    self.title() == project_to_compare.title()
   end
 
   def self.clear
@@ -32,7 +32,7 @@ class Project
 
   def self.find(id)
   project = DB.exec("SELECT * FROM projects WHERE id = #{id};").first
-    title = project.fetch("name")
+    title = project.fetch("title")
     id = project.fetch("id").to_i
     Project.new({:title => title, :id => id})
   end
@@ -46,6 +46,18 @@ class Project
 
   def delete
     DB.exec("DELETE FROM projects WHERE id = #{@id};")
+  end
+
+  def volunteers
+    volunteers = []
+    results = DB.exec("SELECT project_id FROM volunteers WHERE album_id = #{@id};")
+    results.each() do |result|
+      volunteer_id = result.fetch("project_id").to_i()
+      volunteer = DB.exec("SELECT * FROM volunteers WHERE id = #{project_id};")
+      name = volunteer.first().fetch("name")
+      volunteers.push(Volunteer.new({:name => name, :project_id => project_id, :id => nil}))
+    end
+    volunteers
   end
 
 end
