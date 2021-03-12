@@ -1,5 +1,6 @@
 class Project
-  attr_reader :id, :title
+  attr_reader :id
+  attr_accessor :title
 
   def initialize(attributes)
     @title = attributes.fetch(:title)
@@ -31,7 +32,7 @@ class Project
   end
 
   def self.find(id)
-  project = DB.exec("SELECT * FROM projects WHERE id = #{id};").first
+    project = DB.exec("SELECT * FROM projects WHERE id = #{id};").first
     title = project.fetch("title")
     id = project.fetch("id").to_i
     Project.new({:title => title, :id => id})
@@ -49,16 +50,7 @@ class Project
   end
 
   def volunteers
-    volunteers = []
-    results = DB.exec("SELECT project_id FROM volunteers WHERE project_id = #{@id};")
-    results.each() do |result|
-      project_id = result.fetch("project_id").to_i()
-      volunteer = DB.exec("SELECT * FROM volunteers WHERE project_id = #{project_id};")
-      name = volunteer.first().fetch("name")
-      id = volunteer.first().fetch("id").to_i
-      volunteers.push(Volunteer.new({:name => name, :project_id => project_id, :id => id}))
-    end
-    volunteers
+    Volunteer.find_by_project(@id)
   end
 
 end
