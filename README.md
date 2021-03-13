@@ -90,13 +90,25 @@ gem install bundler
 bundle
 ```
 
+* Run psql with the command:
+
+``` bash
+psql
+```
+
+* Within psql terminal, connect to the database with the command:
+
+``` bash
+\c volunteer_tracker
+```
+
 * Run tests with the command:
 
 ``` bash
 rspec
 ```
 
-* View the site by first using the command:
+* View the site with the command:
 
 ``` bash
 ruby app.rb
