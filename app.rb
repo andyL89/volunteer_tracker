@@ -57,7 +57,7 @@ delete('/projects/:id') do
   erb(:projects)
 end
 
-# Volunteerss---------------------------------->
+# Volunteers---------------------------------->
 
 get('/volunteers') do
   @volunteers = Volunteer.all
@@ -98,28 +98,32 @@ delete('/volunteers/:id') do
   erb(:volunteers)
 end
 
-# get('/projects/:id/volunteers/:volunteer_id') do
-#   @volunteer = Volunteer.find(params[:volunteer_id].to_i())
-#   erb(:volunteer)
-# end
+# Get the detail for a specific volunteer.
+get('/projects/:id/volunteers/:volunteer_id') do
+  @volunteer = Volunteer.find(params[:volunteer_id].to_i())
+  erb(:volunteer)
+end
 
-# post('/projects/:id/volunteers') do
-#   @project = Project.find(params[:id].to_i())
-#   volunteer = Volunteer.new({:name => params[:volunteer_name], :project_id => @project.id, :id => nil})
-#   volunteer.save()
-#   erb(:project)
-# end
+# Post a new volunteer. After the volunteer is added, Sinatra will route to the view for the project the volunteer belongs to.
+post('/projects/:id/volunteers') do
+  @project = Project.find(params[:id].to_i())
+  volunteer = Volunteer.new({:name => params[:volunteer_name], :project_id => @project.id, :id => nil})
+  volunteer.save()
+  erb(:project)
+end
 
-# patch('/projects/:id/volunteers/:volunteer_id') do
-#   @project = Project.find(params[:id].to_i())
-#   volunteer = Volunteer.find(params[:volunteer_id].to_i())
-#   volunteer.update(params[:volunteer_name], @project.id)
-#   erb(:project)
-# end
+# Edit a volunteer and then route back to the project view.
+patch('/projects/:id/volunteers/:volunteer_id') do
+  @project = Project.find(params[:id].to_i())
+  volunteer = Volunteer.find(params[:volunteer_id].to_i())
+  volunteer.update(params[:volunteer_name], @project.id)
+  erb(:project)
+end
 
-# delete('/projects/:id/volunteers/:volunteer_id') do
-#   volunteer = Volunteer.find(params[:volunteer_id].to_i())
-#   volunteer.delete
-#   @project = Project.find(params[:id].to_i())
-#   erb(:project)
-# end
+# Delete a volunteer and then route back to the project view.
+delete('/projects/:id/volunteers/:volunteer_id') do
+  volunteer = Volunteer.find(params[:volunteer_id].to_i())
+  volunteer.delete
+  @project = Project.find(params[:id].to_i())
+  erb(:project)
+end
