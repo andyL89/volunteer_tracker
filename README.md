@@ -5,7 +5,7 @@
 * * *
 
 ## Description
-This is an application for creating community volunteer projects. Users can create, update, and delete projects as they please. Users can also add, update, remove volunteers from a project.
+This is an application for creating community volunteer projects. Users can create, update, and delete projects as they please, and can also add, update, and remove volunteers from a project.
 * * *
 
 ## Technologies used
