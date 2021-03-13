@@ -11,10 +11,10 @@ set(:show_exceptions, false)
 # The user should be able to visit the home page and fill out a form to add a new project. When that project is created, the application should direct them back to the homepage.
 
 describe 'the project creation path', {:type => :feature} do
-  it 'takes the user to the homepage where they can create a project' do
-    visit '/'
+  it 'takes the user to the add new project page where they can create a project' do
+    visit '/projects/new'
     fill_in('title', :with => 'Teaching Kids to Code')
-    click_button('Create Project')
+    click_button('Add!')
     expect(page).to have_content('Teaching Kids to Code')
   end
 end
@@ -27,14 +27,14 @@ describe 'the project update path', {:type => :feature} do
     test_project.save
     visit '/'
     click_link('Teaching Kids to Code')
-    click_link('Edit Project')
+    click_link('Edit project')
     fill_in('title', :with => 'Teaching Ruby to Kids')
     click_button('Update Project')
     expect(page).to have_content('Teaching Ruby to Kids')
   end
 end
 
-# A user should be able to nagivate to a project's detail page and delete the project. The user will then be directed to the index page. The project should no longer be on the list of projects.
+# # A user should be able to nagivate to a project's detail page and delete the project. The user will then be directed to the index page. The project should no longer be on the list of projects.
 
 describe 'the project delete path', {:type => :feature} do
   it 'allows a user to delete a project' do
@@ -42,13 +42,13 @@ describe 'the project delete path', {:type => :feature} do
     test_project.save
     id = test_project.id
     visit "/projects/#{id}/edit"
-    click_button('Delete Project')
+    click_button('Delete project')
     visit '/'
     expect(page).not_to have_content("Teaching Kids to Code")
   end
 end
 
-# The user should be able to click on a project detail page and see a list of all volunteers working on that project. The user should be able to click on a volunteer to see the volunteer's detail page.
+# # The user should be able to click on a project detail page and see a list of all volunteers working on that project. The user should be able to click on a volunteer to see the volunteer's detail page.
 
 describe 'the volunteer detail page path', {:type => :feature} do
   it 'shows a volunteer detail page' do
@@ -59,7 +59,7 @@ describe 'the volunteer detail page path', {:type => :feature} do
     test_volunteer.save
     visit "/projects/#{project_id}"
     click_link('Jasmine')
-    fill_in('name', :with => 'Jane')
+    fill_in('volunteer_name', :with => 'Jane')
     click_button('Update Volunteer')
     expect(page).to have_content('Jane')
   end

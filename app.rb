@@ -44,8 +44,7 @@ end
 
 patch('/projects/:id') do
   @project = Project.find(params[:id].to_i())
-  updates = params[:title]
-  @project.update(updates)
+  @project.update(params[:title])
   @projects = Project.all
   erb(:projects)
 end
@@ -85,8 +84,8 @@ end
 patch('/volunteers/:id') do
   @volunteer = Volunteer.find(params[:id].to_i())
   name_update = params[:volunteer_name]
-  project_id_update = params[:project_id]
-  @volunteer.update(name_update, project_id_update)
+  project_id = params[:project_id]
+  @volunteer.update(name_update, project_id)
   @volunteers = Volunteer.all
   erb(:volunteers)
 end
@@ -98,13 +97,13 @@ delete('/volunteers/:id') do
   erb(:volunteers)
 end
 
-# Get the detail for a specific volunteer.
+
 get('/projects/:id/volunteers/:volunteer_id') do
   @volunteer = Volunteer.find(params[:volunteer_id].to_i())
   erb(:volunteer)
 end
 
-# Post a new volunteer. After the volunteer is added, Sinatra will route to the view for the project the volunteer belongs to.
+
 post('/projects/:id/volunteers') do
   @project = Project.find(params[:id].to_i())
   volunteer = Volunteer.new({:name => params[:volunteer_name], :project_id => @project.id, :id => nil})
@@ -112,7 +111,7 @@ post('/projects/:id/volunteers') do
   erb(:project)
 end
 
-# Edit a volunteer and then route back to the project view.
+
 patch('/projects/:id/volunteers/:volunteer_id') do
   @project = Project.find(params[:id].to_i())
   volunteer = Volunteer.find(params[:volunteer_id].to_i())
@@ -120,7 +119,7 @@ patch('/projects/:id/volunteers/:volunteer_id') do
   erb(:project)
 end
 
-# Delete a volunteer and then route back to the project view.
+
 delete('/projects/:id/volunteers/:volunteer_id') do
   volunteer = Volunteer.find(params[:volunteer_id].to_i())
   volunteer.delete
