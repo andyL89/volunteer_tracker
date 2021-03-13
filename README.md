@@ -1,11 +1,11 @@
 # Volunteer Tracker
 #### *Created By: Andrew Lawson*
-#### *Volunterr Tracker with SQL*
+#### *Volunteer Tracker with SQL*
 
 * * *
 
 ## Description
-This is an application for 
+This is an application for creating community volunteer projects. Users can create, update, and delete projects as they please. Users can also add, update, remove volunteers from a project.
 * * *
 
 ## Technologies used
@@ -21,9 +21,7 @@ This is an application for
 ## Installation :
 ### Want to see this webpage now?
 
-* Go to (  ).
-
-Or clone the project to your computer and open locally:
+* Clone the project to your computer and open locally:
 
 * Go to ( https://github.com/andyL89/volunteer_tracker ).
 
@@ -108,7 +106,6 @@ ruby app.rb
 
 ## Addition comments:
 * Created on 3/12/21
-
 
 * * *
 
