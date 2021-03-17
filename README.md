@@ -29,9 +29,8 @@ This is an application for creating community volunteer projects. Users can crea
 
 * * *
 ## Installation :
-### Want to see this webpage now?
 
-* Clone the project to your computer and open locally:
+#### Clone the project to your computer and open locally:
 
 * Go to ( https://github.com/andyL89/volunteer_tracker ).
 
