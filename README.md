@@ -34,11 +34,11 @@ This is an application for creating community volunteer projects. Users can crea
 
 * Go to ( https://github.com/andyL89/volunteer_tracker ).
 
-*  Navigate to the code button on the github website.
+*  Navigate to the green 'code' button on the repository webpage.
 
 * Click on the code button to open the menu.
 
-- Copy the HTTPS code by clicking the clipboard next to the link.
+- Copy the HTTPS code by clicking the clipboard icon to the right of the link.
 
 - Within your Bash terminal navigate to your desired location by using cd followed by your desired directory.
 
