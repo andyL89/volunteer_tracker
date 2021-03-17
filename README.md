@@ -9,15 +9,25 @@ This is an application for creating community volunteer projects. Users can crea
 * * *
 
 ## Technologies used
+* Bootstrap
+* Bundler
+* Capybara
+* Embedded Ruby
+* git
+* HTML
+* PostgreSQL
+* Rspec
 * Ruby
 * Sinatra
-* Rspec
-* Capybara
-* SQL
 
 * * *
+## User Stories
 
+* As a non-profit employee, I want to view, add, update and delete projects.
+* As a non-profit employee, I want to view and add volunteers.
+* As a non-profit employee, I want to add volunteers to a project.
 
+* * *
 ## Installation :
 ### Want to see this webpage now?
 
@@ -90,16 +100,16 @@ gem install bundler
 bundle
 ```
 
-* Run psql with the command:
+* Setup database with the following commands:
 
 ``` bash
-psql
+createdb volunteer_tracker
 ```
-
-* Within psql terminal, connect to the database with the command:
-
 ``` bash
-\c volunteer_tracker
+psql volunteer_tracker < database_backup.sql
+```
+``` bash
+createdb -T volunteer_tracker volunteer_tracker_test
 ```
 
 * Run tests with the command:
